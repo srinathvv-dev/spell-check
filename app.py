@@ -3,27 +3,8 @@ import requests
 from bs4 import BeautifulSoup
 from spellchecker import SpellChecker
 import re
-from flask import Flask, request
-
-
-app = Flask(__name__)
-
-@app.route('/api/spellcheck', methods=['POST'])
-def spellcheck():
-    # Handle spell check logic here
-    data = request.json
-    # Perform spell check on data
-    return {'result': 'Spell check performed successfully'}
-
-# Add more routes as needed
-
 import os
-
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 8080))
-    app.run(host='0.0.0.0', port=port, debug=True)
-
-
+app = Flask(__name__)
 
 # Function to get text from the soup excluding script and style tags
 def get_text_from_soup(soup):
@@ -61,4 +42,7 @@ def check_spelling():
     return render_template('report.html', report=report)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Use the PORT environment variable provided by Render, default to 8080 if not available
+    port = int(os.environ.get('PORT', 8080))
+    # Change the host to '0.0.0.0' and port to the one specified by Render
+    app.run(host='0.0.0.0', port=port, debug=True)
