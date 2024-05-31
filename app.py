@@ -17,8 +17,12 @@ def spellcheck():
 
 # Add more routes as needed
 
+import os
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 8080))
+    app.run(host='0.0.0.0', port=port, debug=True)
+
 
 
 # Function to get text from the soup excluding script and style tags
