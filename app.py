@@ -3,8 +3,23 @@ import requests
 from bs4 import BeautifulSoup
 from spellchecker import SpellChecker
 import re
+from flask import Flask, request
+
 
 app = Flask(__name__)
+
+@app.route('/api/spellcheck', methods=['POST'])
+def spellcheck():
+    # Handle spell check logic here
+    data = request.json
+    # Perform spell check on data
+    return {'result': 'Spell check performed successfully'}
+
+# Add more routes as needed
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
 
 # Function to get text from the soup excluding script and style tags
 def get_text_from_soup(soup):
